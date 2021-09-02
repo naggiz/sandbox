@@ -4,6 +4,10 @@
 # Created: 25/1-18
 # Last Updated: 15/1-19
 #
+#
+# Install chocolatey:
+# Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+#
 # Install boxstarter:
 # 	. { iwr -useb http://boxstarter.org/bootstrapper.ps1 } | iex; get-boxstarter -Force
 #
@@ -20,11 +24,6 @@
 Disable-UAC
 choco feature enable -n allowGlobalConfirmation
 #----           ---
-
-
-#--- Install Chocolatey & Boxstarter ---
-# iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
-# choco install -y boxstarter
 
 
 # Initialize reboot log file
@@ -65,7 +64,6 @@ Set-WindowsExplorerOptions `
 # Update Windows and reboot if necessary
 Install-WindowsUpdate -AcceptEula -GetUpdatesFromMS
 Disable-MicrosoftUpdate
-
 
 #--- Windows Settings ---
 Disable-BingSearch
@@ -236,22 +234,18 @@ Pip install plotly
 Pip install pyqt # GUI programming
 
  
-
 choco install curl -y 
 choco install anaconda3 -y
 choco install ruby-y
 choco install php -y 
-choco install visu
-alstudiocode -y
-choco install visualstudio2017community -y  
-choco install visualstudio2017-workload-manageddesktop -y
-choco install virtualbox -y
+#choco install visualstudiocode -y
+#choco install visualstudio2017community -y  
+#choco install visualstudio2017-workload-manageddesktop -y
+#choco install virtualbox -y
 choco install SourceTree -y 
 choco install mongodb -y
-choco install virtualbox 
-choco install docker-for-windows -y 
+#choco install docker-for-windows -y 
 choco install git -params '"/GitAndUnixToolsOnPath /WindowsTerminal"' -y
-
 
 
 # # --- Git ---
@@ -260,7 +254,7 @@ choco install poshgit
 Import-Module posh-git
 choco upgrade git
 refreshenv
-git config --global user.name "Lars Hjørnevik"
+git config --global user.name "Lars HjÃ¸rnevik"
 git config --global user.email "lars@dr.com"
 git config --global credential.helper wincred
 git config --global --bool pull.rebase true
@@ -269,26 +263,25 @@ git config --global --bool pull.rebase true
 
 # # --- Communication ---
 choco install discord
-choco install skype -y 
-choco install whatsapp -y 
+#choco install skype -y 
+#choco install whatsapp -y 
 choco install signal -y
-
 
 
 # # --- Media and office ---
 choco install spotify -y
-choco install itunes -y
+#choco install itunes -y
 choco install vlc -y
 choco install exiftool -y  # Meta data program
 choco install sharex -y  # Screen capture software, ranked 1
-choco install greenshot -y  # Screen capture software, ranked 2
+#choco install greenshot -y  # Screen capture software, ranked 2
 choco install IrfanView -y 
 choco install irfanviewplugins -y 
 choco install k-litecodepackfull -y 
 choco install AudaCity -y # Record and edit sounds
 choco install -y flashplayerplugin
 choco install paint.net -y 
-choko install libreoffice-fresh -y
+#choko install libreoffice-fresh -y
 choco install uplay
 
 
@@ -298,7 +291,7 @@ choco install brave -y
 choco install googlechrome -y
 choco install tor-browser -y
 choco install Openvpn -y
-choco install thunderbird -y
+#choco install thunderbird -y
 choco install evernote -y
 
 
@@ -306,12 +299,10 @@ choco install evernote -y
 # # --- Games ---
 choco install fs-uae
 choco install freeciv -y
-choco install steam -y
+#choco install steam -y
 choco install steamcmd -y  # https://developer.valvesoftware.com/wiki/SteamCMD
 choco install steam-cleaner # Steam Cleaner is a tool that will remove large amounts of data left behind by Steam, Origin, Uplay and GoG.
-choco install epicgameslauncher
-
-
+#choco install epicgameslauncher
 
 
 # #--- Fonts ---
