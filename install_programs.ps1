@@ -1,30 +1,9 @@
 # Description: Boxstarter / Chocolatey Script
 # Author: Lars H (lars@dr.com)
-# Shoutout to Jessie, ElJefeDSecurIT, TechPreacher and ian-noble for inspiration
-# Created: 25/1-18
-# Last Updated: 15/1-19
-#
-#
-# Install chocolatey:
-# Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-#
-# Install boxstarter:
-# 	. { iwr -useb http://boxstarter.org/bootstrapper.ps1 } | iex; get-boxstarter -Force
-#
-# You might need to set: Set-ExecutionPolicy RemoteSigned
-#
-# Run this boxstarter by calling the following from an **elevated** command-prompt:
-# 	Install-BoxstarterPackage -PackageName http://boxstarter.org/package/nr/url?hthttps://gist.githubusercontent.com/hjornevik/6f85a501415f3e429d680c543e51ef00/raw/5743c6446c7cb50303e6d367d50e9a38201f65aa/Ladden-setup.ps1
-# OR
-# 	Install-BoxstarterPackage -PackageName  http://boxstarter.org/package/nr/url?hthttps://gist.githubusercontent.com/hjornevik/6f85a501415f3e429d680c543e51ef00/raw/5743c6446c7cb50303e6d367d50e9a38201f65aa/Ladden-setup.ps1 -DisableReboots
-#
-# Learn more: http://boxstarter.org/Learn/WebLauncher
 
 #---- TEMPORARY ---
 Disable-UAC
 choco feature enable -n allowGlobalConfirmation
-#----           ---
-
 
 # Initialize reboot log file
 $reboot_log = "C:\installation.rbt"
@@ -254,7 +233,7 @@ choco install poshgit
 Import-Module posh-git
 choco upgrade git
 refreshenv
-git config --global user.name "Lars HjÃ¸rnevik"
+git config --global user.name "Lars Hjornevik"
 git config --global user.email "lars@dr.com"
 git config --global credential.helper wincred
 git config --global --bool pull.rebase true
@@ -308,144 +287,3 @@ choco install steam-cleaner # Steam Cleaner is a tool that will remove large amo
 # #--- Fonts ---
 choco install inconsolata -y
 choco install sourcecodepro -y
-
-if (Test-PendingReboot) { Invoke-Reboot }
-
-
-
-# #--- Uninstall unecessary applications that come with Windows out of the box ---
-# Write-BoxstarterMessage "*** Store Apps Cleanup ***"
-$apps = @(
-    # default Windows 10 apps:
-    "Microsoft.3DBuilder"
-    "Microsoft.Appconnector"
-    "Microsoft.Autodesk"
-    "Microsoft.BingFinance"
-    "Microsoft.BingNews"
-    "Microsoft.BingSports"
-    "Microsoft.BingWeather"
-    "Microsoft.BubbleWitch"
-    #"Microsoft.FreshPaint"
-    "Microsoft.Getstarted"
-    "Microsoft.MicrosoftOfficeHub"
-    "Microsoft.MicrosoftSolitaireCollection"
-    "Microsoft.MicrosoftStickyNotes"
-    "Microsoft.Office.OneNote"
-    "Microsoft.OneConnect"
-    "Microsoft.People"
-    "Microsoft.SkypeApp"
-    "Microsoft.Windows.Photos"
-    "Microsoft.WindowsAlarms"
-    #"Microsoft.WindowsCalculator"
-    "Microsoft.WindowsCamera"
-    "Microsoft.WindowsMaps"
-    "Microsoft.WindowsPhone"
-    "Microsoft.WindowsSoundRecorder"
-    #"Microsoft.WindowsStore"
-    "Microsoft.XboxApp"
-    "Microsoft.ZuneMusic"
-    "Microsoft.ZuneVideo"
-    "microsoft.windowscommunicationsapps"
-    "Microsoft.MinecraftUWP"
-    "Microsoft.MicrosoftPowerBIForWindows"
-    "Microsoft.NetworkSpeedTest"
-    "Microsoft.CommsPhone"
-    "Microsoft.ConnectivityStore"
-    "Microsoft.Messaging"
-    "Microsoft.Office.Sway"
-    "Microsoft.OneConnect"
-    "Microsoft.WindowsFeedbackHub"
-    "Microsoft.BingFoodAndDrink"
-    "Microsoft.BingTravel"
-    "Microsoft.BingHealthAndFitness"
-    "Microsoft.WindowsReadingList"
-    # non-Microsoft:
-    "9E2F88E3.Twitter"
-    "PandoraMediaInc.29680B314EFC2"
-    "Flipboard.Flipboard"
-    "ShazamEntertainmentLtd.Shazam"
-    "king.com.CandyCrushSaga"
-    "king.com.CandyCrushSodaSaga"
-    "king.com.*"
-    "ClearChannelRadioDigital.iHeartRadio"
-    "4DF9E0F8.Netflix"
-    "6Wunderkinder.Wunderlist"
-    "Drawboard.DrawboardPDF"
-    "2FE3CB00.PicsArt-PhotoStudio"
-    "D52A8D61.FarmVille2CountryEscape"
-    "TuneIn.TuneInRadio"
-    "GAMELOFTSA.Asphalt8Airborne"
-    "TheNewYorkTimes.NYTCrossword"
-    "DB6EA5DB.CyberLinkMediaSuiteEssentials"
-    "Facebook.Facebook"
-    "flaregamesGmbH.RoyalRevolt2"
-    "Playtika.CaesarsSlotsFreeCasino"
-    "A278AB0D.MarchofEmpires"
-    "KeeperSecurityInc.Keeper"
-    "ThumbmunkeysLtd.PhototasticCollage"
-    "XINGAG.XING"
-    "89006A2E.AutodeskSketchBook"
-    "D5EA27B7.Duolingo-LearnLanguagesforFree"
-    "46928bounde.EclipseManager"
-    "ActiproSoftwareLLC.562882FEEB491" # next one is for the Code Writer from Actipro Software LLC
-    "CAF9E577.Plex"
-    "*Dropbox*"
-	
-    # # apps which cannot be removed using Remove-AppxPackage
-    # #"Microsoft.BioEnrollment"
-    # #"Microsoft.MicrosoftEdge"
-    # #"Microsoft.Windows.Cortana"
-    # #"Microsoft.WindowsFeedback"
-    # #"Microsoft.XboxGameCallableUI"
-     # #"Microsoft.XboxIdentityProvider"
-    # #"Windows.ContactSupport"
- )
-
-foreach ($app in $apps) {
-    Write-Output "Trying to remove $app"
-
-    Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage
-
-    Get-AppXProvisionedPackage -Online |
-        Where-Object DisplayName -EQ $app |
-        Remove-AppxProvisionedPackage -Online -AllUsers
-}
-
-# Uninstall Minecraft
-Get-AppxPackage *Minecraft* | Remove-AppxPackage
-
-# Uninstall Netflix
-Get-AppxPackage *Netflix* | Remove-AppxPackage
-
-# Uninstall McAfee
-Get-AppxPackage *McAfee* | Remove-AppxPackage
-$mcafee = gci "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" | foreach { gp $_.PSPath } | ? { $_ -match "McAfee Security" } | select UninstallString
-if ($mcafee) {
-	$mcafee = $mcafee.UninstallString -Replace "C:\Program Files\McAfee\MSC\mcuihost.exe",""
-	Write "Uninstalling McAfee..."
-	start-process "C:\Program Files\McAfee\MSC\mcuihost.exe" -arg "$mcafee" -Wait
-}
-if (Test-PendingReboot) { Invoke-Reboot }
-
-#### Schedule updates to applications with chocolatey
-# schtasks.exe /create /s "localhost" /ru "System" /tn "Update Chocolatey packages" /tr "%ChocolateyInstall%\bin\cup all" /sc DAILY /st 06:00 /F
-
-
-Move-LibraryDirectory "Downloads" "D:\Downloads"
-
-
-# --- Restore Temporary Settings ---
-Update-ExecutionPolicy Unrestricted
-Enable-MicrosoftUpdate
-Install-WindowsUpdate -acceptEula -GetUpdatesFromMS
-Enable-UAC
-
-
-# --- Rename the Computer ---
-Requires restart, or add the -Restart flag
-$computername = "Ladden"
-if ($env:computername -ne $computername) {
-	Rename-Computer -NewName $computername
-}
-
-if (Test-PendingReboot) { Invoke-Reboot }
