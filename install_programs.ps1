@@ -399,7 +399,7 @@ $apps = @(
     # #"Microsoft.XboxGameCallableUI"
      # #"Microsoft.XboxIdentityProvider"
     # #"Windows.ContactSupport"
-# )
+ )
 
 foreach ($app in $apps) {
     Write-Output "Trying to remove $app"
