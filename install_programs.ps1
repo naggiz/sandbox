@@ -262,6 +262,8 @@ choco install -y flashplayerplugin
 choco install paint.net -y 
 #choko install libreoffice-fresh -y
 choco install uplay
+choco install adobereader
+choco install pdf-ifilter-64 # Adobe PDF iFilter allows the user to easily search for text within Adobe PDF documents using Microsoft indexing clients.
 
 
 
