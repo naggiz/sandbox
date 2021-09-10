@@ -278,6 +278,7 @@ choco install evernote -y
 
 
 # # --- Games ---
+choco install dosbox
 choco install fs-uae
 choco install freeciv -y
 #choco install steam -y
