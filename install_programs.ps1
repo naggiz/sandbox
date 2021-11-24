@@ -248,6 +248,7 @@ choco install signal -y
 
 
 # # --- Media and office ---
+choco install jdownloader -y # pod
 choco install spotify -y
 #choco install itunes -y
 choco install vlc -y
