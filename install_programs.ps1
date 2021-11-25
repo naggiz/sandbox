@@ -185,14 +185,18 @@ if (Test-PendingReboot) { Invoke-Reboot }
 
 # #--- Tools ---
 choco install TotalCommander -y
-choco install Foxit -y
-choco install chocolateygui -y
+choco install foxitreader -y
+# choco install chocolateygui -y
 choco install 1password -y
 choco install 7zip -y
 choco install notepadplusplus -y
 choco install putty -y
-choco install filezilla -y
+choco install utorrent
+choco install filezilla -y # FTP-server
+choco install winscp -y 
 choco install imgburn -y
+choco install angryip -y # Angry IP-scanner
+choco install etcher # Balena etcher (brenne SD-kort)
 
 
 # # --- DevTools ---
@@ -264,6 +268,7 @@ choco install paint.net -y
 choco install uplay
 choco install adobereader
 choco install pdf-ifilter-64 # Adobe PDF iFilter allows the user to easily search for text within Adobe PDF documents using Microsoft indexing clients.
+choco install calibre -y # Ebok
 
 
 
